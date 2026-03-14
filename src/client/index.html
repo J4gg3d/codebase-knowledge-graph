@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown Graph Visualizer</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="graph-container"></div>
+    <div id="sidebar" class="sidebar hidden">
+      <button id="sidebar-close" class="sidebar-close">&times;</button>
+      <h2 id="sidebar-title"></h2>
+      <div id="sidebar-type" class="sidebar-badge"></div>
+      <div id="sidebar-score" class="sidebar-section"></div>
+      <div id="sidebar-meta" class="sidebar-section"></div>
+      <div id="sidebar-neighbors" class="sidebar-section"></div>
+    </div>
+    <div id="controls">
+      <div id="project-bar">
+        <input type="text" id="project-path" placeholder="Projektpfad eingeben..." />
+        <button id="project-load" title="Projekt laden">Laden</button>
+      </div>
+      <input type="text" id="search-input" placeholder="Suche..." />
+      <div id="stats-bar"></div>
+    </div>
+
+    <!-- Legende links unten -->
+    <div id="legend">
+      <div class="legend-title">Cluster-Farben</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(100,160,255,0.8)"></span> Gruppe 1</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(240,120,140,0.8)"></span> Gruppe 2</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(160,120,220,0.8)"></span> Gruppe 3</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(100,210,160,0.8)"></span> Gruppe 4</div>
+      <div class="legend-item"><span class="legend-dot" style="background:rgba(240,200,80,0.8)"></span> Gruppe 5+</div>
+      <div class="legend-divider"></div>
+      <div class="legend-title">Formen</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#888"></span> Datei</div>
+      <div class="legend-item"><span class="legend-dot legend-diamond" style="background:#888"></span> Tag</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#888;border-radius:3px"></span> Config</div>
+      <div class="legend-divider"></div>
+      <div class="legend-title">Groesse &amp; Glow</div>
+      <div class="legend-item"><span class="legend-line" style="background:#f1c40f;height:1px;border-top:2px dashed #f1c40f"></span> Co-Change (Git)</div>
+      <div class="legend-divider"></div>
+      <div class="legend-hint">Groesse = Relevance Score (bis 40px)</div>
+      <div class="legend-hint">Leuchten = Score ueber 40</div>
+      <div class="legend-hint">Gestrichelt = Git Co-Change</div>
+    </div>
+
+    <!-- Dashboard Toggle -->
+    <button id="dashboard-toggle" class="dashboard-toggle" title="Auswertungen">Auswertungen</button>
+    <div id="dashboard" class="dashboard hidden">
+      <div class="dashboard-header">
+        <h2>Projekt-Auswertungen</h2>
+        <button id="dashboard-close" class="sidebar-close">&times;</button>
+      </div>
+      <div class="dashboard-tabs">
+        <button class="tab active" data-tab="summary">Uebersicht</button>
+        <button class="tab" data-tab="hotspots">Hot Spots</button>
+        <button class="tab" data-tab="orphans">Verwaist</button>
+        <button class="tab" data-tab="cochange">Co-Change</button>
+      </div>
+      <div id="dashboard-content" class="dashboard-content"></div>
+    </div>
+
+    <!-- Zoom-Regler unten mitte -->
+    <div id="zoom-controls">
+      <button id="zoom-out" class="zoom-btn" title="Herauszoomen">−</button>
+      <input type="range" id="zoom-slider" min="10" max="500" value="100" />
+      <button id="zoom-in" class="zoom-btn" title="Hineinzoomen">+</button>
+      <button id="zoom-fit" class="zoom-btn zoom-fit" title="Alles anzeigen">⊡</button>
+    </div>
+  </div>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
